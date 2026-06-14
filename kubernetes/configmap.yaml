@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: skynetx-config
+  namespace: skynetx
+data:
+  APP_NAME: "SkyNetX Drone Traffic Management Platform"
+  ENVIRONMENT: "development"
