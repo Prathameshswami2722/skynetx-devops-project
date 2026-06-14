@@ -1,0 +1,79 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "graphTooltip": 0,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "App Availability",
+      "gridPos": { "h": 6, "w": 6, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "up{job=\"skynetx-app\"}",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": ["lastNotNull"],
+          "fields": ""
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "HTTP Request Count",
+      "gridPos": { "h": 8, "w": 12, "x": 6, "y": 0 },
+      "targets": [
+        {
+          "expr": "rate(skynetx_http_requests_total[1m])",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Telemetry Events Ingested",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 6 },
+      "targets": [
+        {
+          "expr": "rate(skynetx_telemetry_events_ingested_total[1m])",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "title": "Kubernetes Pod Status",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "options": {
+        "mode": "markdown",
+        "content": "Use this panel to explain pod health in the SkyNetX demo. If Kubernetes metrics are connected later, replace this with live pod status graphs for pod count, restart count, and readiness."
+      }
+    },
+    {
+      "type": "text",
+      "title": "Python and Flask Metrics Note",
+      "gridPos": { "h": 6, "w": 12, "x": 0, "y": 14 },
+      "options": {
+        "mode": "markdown",
+        "content": "SkyNetX currently exposes custom Prometheus metrics through `/metrics`, including request totals and telemetry ingestion count. More Python runtime metrics can be added in later stages."
+      }
+    }
+  ],
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": ["skynetx", "devops", "college-demo"],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "title": "SkyNetX Monitoring Dashboard",
+  "version": 1
+}

@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Verify Tools') {
+            steps {
+                sh 'python3 --version'
+                sh 'docker --version'
+                sh 'kubectl version --client'
+            }
+        }
+
+        stage('Install Python Dependencies') {
+            steps {
+                sh 'pip3 install -r requirements.txt'
+            }
+        }
+
+        stage('Run Basic Application Checks') {
+            steps {
+                sh 'python3 -m py_compile app.py'
+                sh 'python3 -c "from app import app; print(app.url_map)"'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t skynetx-app:1.0 .'
+            }
+        }
+
+        stage('Apply Kubernetes Manifests') {
+            steps {
+                sh 'kubectl apply -f kubernetes/'
+            }
+        }
+
+        stage('Verify Kubernetes Rollout') {
+            steps {
+                sh 'kubectl rollout status deployment/skynetx-app -n skynetx'
+            }
+        }
+
+        stage('Show Pods and Service') {
+            steps {
+                sh 'kubectl get pods -n skynetx'
+                sh 'kubectl get svc -n skynetx'
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+groups:
+  - name: skynetx-alerts
+    rules:
+      - alert: SkyNetXAppDown
+        expr: up{job="skynetx-app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "SkyNetX application is down"
+          description: "Prometheus cannot scrape the SkyNetX /metrics endpoint."
+
+      - alert: SkyNetXHighRequestCount
+        expr: increase(skynetx_http_requests_total[5m]) > 100
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "SkyNetX request rate is high"
+          description: "HTTP requests increased above the basic demo threshold in the last 5 minutes."
+
+      - alert: SkyNetXServiceUnavailable
+        expr: absent(up{job="skynetx-kubernetes-service"})
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "SkyNetX service or pod may be unavailable"
+          description: "The Kubernetes service target is not being scraped by Prometheus."
