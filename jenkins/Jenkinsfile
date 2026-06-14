@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "/opt/homebrew/bin:/usr/local/bin:/Applications/Docker.app/Contents/Resources/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env.PATH}"
+        KUBECONFIG = "/Users/prathameshswami/.kube/config"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -10,9 +15,13 @@ pipeline {
 
         stage('Verify Tools') {
             steps {
+                sh 'echo $PATH'
+                sh 'which docker || true'
                 sh 'python3 --version'
                 sh 'docker --version'
+                sh 'which kubectl || true'
                 sh 'kubectl version --client'
+                sh 'kubectl config current-context'
             }
         }
 
