@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-4 p-lg-5 rounded-4 hero-panel mb-4">
+    <h1 class="display-6 fw-bold">SkyNetX Global Drone Traffic Management Dashboard</h1>
+    <p class="lead mb-0">Operational visibility for autonomous aviation across logistics, emergency response, agriculture, and government missions.</p>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm stat-card">
+            <div class="card-body">
+                <h5>Total Registered Drones</h5>
+                <p class="display-6 fw-bold">{{ total_drones }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm stat-card">
+            <div class="card-body">
+                <h5>Active Drones</h5>
+                <p class="display-6 fw-bold text-success">{{ active_drones }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm stat-card">
+            <div class="card-body">
+                <h5>Pending Flight Approvals</h5>
+                <p class="display-6 fw-bold text-warning">{{ pending_approvals }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm stat-card">
+            <div class="card-body">
+                <h5>Emergency Alerts</h5>
+                <p class="display-6 fw-bold text-danger">{{ emergency_alerts }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="card-title">Telemetry Operations</h4>
+                <p class="card-text">Total telemetry events received by the SkyNetX platform.</p>
+                <p class="display-5 fw-bold text-primary">{{ telemetry_events }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="card-title">Recent Flight Requests</h4>
+                {% if recent_flights %}
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                        <thead>
+                            <tr>
+                                <th>Drone</th>
+                                <th>Route</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for flight in recent_flights %}
+                            <tr>
+                                <td>{{ flight.drone_id }}</td>
+                                <td>{{ flight.source_location }} to {{ flight.destination_location }}</td>
+                                <td><span class="badge text-bg-secondary">{{ flight.approval_status }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="mb-0">No flight requests submitted yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

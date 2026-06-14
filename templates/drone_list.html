@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="card-title mb-4">Registered Drone Fleet</h2>
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Drone ID</th>
+                        <th>Operator</th>
+                        <th>Type</th>
+                        <th>Region</th>
+                        <th>Purpose</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for drone in drones %}
+                    <tr>
+                        <td>{{ drone.drone_id }}</td>
+                        <td>{{ drone.operator_name }}</td>
+                        <td>{{ drone.drone_type }}</td>
+                        <td>{{ drone.operational_region }}</td>
+                        <td>{{ drone.purpose }}</td>
+                        <td><span class="badge text-bg-dark">{{ drone.status }}</span></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">No drones registered in SkyNetX yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

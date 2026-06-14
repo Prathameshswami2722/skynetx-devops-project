@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="card-title mb-4">Admin Flight Approval Console</h2>
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Drone ID</th>
+                        <th>Route</th>
+                        <th>Purpose</th>
+                        <th>Altitude</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for flight in requests_list %}
+                    <tr>
+                        <td>{{ flight.drone_id }}</td>
+                        <td>{{ flight.source_location }} to {{ flight.destination_location }}</td>
+                        <td>{{ flight.flight_purpose }}</td>
+                        <td>{{ flight.requested_altitude }}</td>
+                        <td><span class="badge text-bg-secondary">{{ flight.approval_status }}</span></td>
+                        <td>
+                            {% if flight.approval_status == "Pending" %}
+                            <form method="post" class="d-flex gap-2">
+                                <input type="hidden" name="request_id" value="{{ flight.id }}">
+                                <button type="submit" name="decision" value="Approved" class="btn btn-sm btn-success">Approve</button>
+                                <button type="submit" name="decision" value="Rejected" class="btn btn-sm btn-danger">Reject</button>
+                            </form>
+                            {% else %}
+                            <span class="text-muted">Decision recorded</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">No flight authorization requests available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

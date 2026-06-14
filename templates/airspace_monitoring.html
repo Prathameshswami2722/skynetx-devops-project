@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4>Active Drones in Monitored Airspace</h4>
+                <p class="display-6 fw-bold text-primary">{{ active_drones_count }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="card-title mb-4">Airspace Monitoring</h2>
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Drone</th>
+                        <th>Operator</th>
+                        <th>Region</th>
+                        <th>Route Status</th>
+                        <th>Collision Risk</th>
+                        <th>Region Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in monitoring_rows %}
+                    <tr>
+                        <td>{{ row.drone_id }}</td>
+                        <td>{{ row.operator_name }}</td>
+                        <td>{{ row.operational_region }}</td>
+                        <td>{{ row.route_status }}</td>
+                        <td>{{ row.collision_risk }}</td>
+                        <td>{{ row.region_status }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">No live telemetry available for monitored airspace.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="card-title mb-4">Telemetry Update</h2>
+        <form method="post" class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Drone ID</label>
+                <select name="drone_id" class="form-select" required>
+                    {% for drone in drones %}
+                    <option value="{{ drone.drone_id }}">{{ drone.drone_id }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Latitude</label>
+                <input type="number" step="any" name="latitude" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Longitude</label>
+                <input type="number" step="any" name="longitude" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Altitude</label>
+                <input type="number" step="any" name="altitude" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Speed</label>
+                <input type="number" step="any" name="speed" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Battery Percentage</label>
+                <input type="number" name="battery_percentage" min="0" max="100" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Signal Status</label>
+                <select name="signal_status" class="form-select" required>
+                    <option value="Strong">Strong</option>
+                    <option value="Weak">Weak</option>
+                    <option value="Lost">Lost</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Weather Condition</label>
+                <input type="text" name="weather_condition" class="form-control" placeholder="Clear, Rain, Storm, Windy" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Timestamp</label>
+                <input type="datetime-local" name="timestamp" class="form-control" required>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Submit Telemetry</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

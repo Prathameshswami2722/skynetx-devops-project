@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="card-title mb-4">Flight Authorization Request</h2>
+        <form method="post" class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Drone ID</label>
+                <select name="drone_id" class="form-select" required>
+                    {% for drone in drones %}
+                    <option value="{{ drone.drone_id }}">{{ drone.drone_id }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Flight Purpose</label>
+                <input type="text" name="flight_purpose" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Source Location</label>
+                <input type="text" name="source_location" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Destination Location</label>
+                <input type="text" name="destination_location" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Requested Altitude</label>
+                <input type="number" step="any" name="requested_altitude" class="form-control" required>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Submit Flight Request</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

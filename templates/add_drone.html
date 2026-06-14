@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="card-title mb-4">Register SkyNetX Drone</h2>
+        <form method="post" class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Drone ID</label>
+                <input type="text" name="drone_id" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Operator Name</label>
+                <input type="text" name="operator_name" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Drone Type</label>
+                <input type="text" name="drone_type" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Operational Region</label>
+                <input type="text" name="operational_region" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Purpose</label>
+                <select name="purpose" class="form-select" required>
+                    <option value="Logistics">Logistics</option>
+                    <option value="Emergency Response">Emergency Response</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Government">Government</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-select" required>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                    <option value="Maintenance">Maintenance</option>
+                    <option value="Communication Lost">Communication Lost</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Register Drone</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

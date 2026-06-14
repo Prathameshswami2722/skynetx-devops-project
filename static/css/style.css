@@ -1,0 +1,29 @@
+:root {
+    --skynetx-navy: #0b2545;
+    --skynetx-blue: #134074;
+    --skynetx-sky: #8da9c4;
+    --skynetx-cloud: #eef4ed;
+}
+
+body {
+    background: linear-gradient(180deg, #f4f7fb 0%, #e7edf6 100%);
+    min-height: 100vh;
+}
+
+.skynetx-nav {
+    background: linear-gradient(90deg, var(--skynetx-navy), var(--skynetx-blue));
+}
+
+.hero-panel {
+    background: linear-gradient(135deg, rgba(11, 37, 69, 0.95), rgba(19, 64, 116, 0.85));
+    color: #fff;
+}
+
+.stat-card {
+    border: 0;
+}
+
+.card {
+    border: 0;
+    border-radius: 1rem;
+}
