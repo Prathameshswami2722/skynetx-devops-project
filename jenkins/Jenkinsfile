@@ -27,14 +27,25 @@ pipeline {
 
         stage('Install Python Dependencies') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh '''
+                    python3 -m venv .venv
+                    . .venv/bin/activate
+                    python -m pip install --upgrade pip
+                    python -m pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Run Basic Application Checks') {
             steps {
-                sh 'python3 -m py_compile app.py'
-                sh 'python3 -c "from app import app; print(app.url_map)"'
+                sh '''
+                    . .venv/bin/activate
+                    python -m py_compile app.py
+                '''
+                sh '''
+                    . .venv/bin/activate
+                    python -c "from app import app; print(app.url_map)"
+                '''
             }
         }
 
