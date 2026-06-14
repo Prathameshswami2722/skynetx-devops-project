@@ -29,6 +29,9 @@ The objective of this application is to build a small but functional business ap
 ```text
 app.py
 requirements.txt
+Dockerfile
+.dockerignore
+docker-compose.yml
 templates/
 static/
 README.md
@@ -56,6 +59,34 @@ README.md
    http://127.0.0.1:5000
    ```
 
+## Run with Docker
+1. Build the Docker image:
+   ```bash
+   docker build -t skynetx-app .
+   ```
+2. Run the container:
+   ```bash
+   docker run -p 5000:5000 skynetx-app
+   ```
+3. Open the application in your browser:
+   ```text
+   http://127.0.0.1:5000
+   ```
+
+## Run with Docker Compose
+1. Build and start the application:
+   ```bash
+   docker-compose up --build
+   ```
+2. Run in detached mode if needed:
+   ```bash
+   docker-compose up -d --build
+   ```
+3. Stop the application:
+   ```bash
+   docker-compose down
+   ```
+
 ## DevOps Case Study Relevance
 This application is intentionally designed around the SkyNetX college case study rather than as a generic drone app. Its modules represent the same operational areas discussed in the problem statement:
 
@@ -67,3 +98,5 @@ This application is intentionally designed around the SkyNetX college case study
 - health and metrics endpoints for observability and future DevOps integration
 
 In later stages, this app can be containerized, deployed through CI/CD pipelines, scaled across infrastructure, monitored through dashboards, secured with secrets management, and used to demonstrate disaster recovery and resilience patterns from the SkyNetX DevOps ecosystem.
+
+This Docker setup is intentionally simple for a college DevOps demonstration. It packages the Flask application into a portable container so the same SkyNetX app can later be used with Jenkins pipelines, Kubernetes deployments, Terraform-managed infrastructure, and observability tools in the broader DevOps case study.
