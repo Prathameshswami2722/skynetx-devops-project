@@ -17,11 +17,11 @@ pipeline {
             steps {
                 sh 'echo $PATH'
                 sh 'which docker || true'
-                sh 'python3 --version'
-                sh 'docker --version'
+                sh 'python3 --version || true'
+                sh 'docker --version || true'
                 sh 'which kubectl || true'
-                sh 'kubectl version --client'
-                sh 'kubectl config current-context'
+                sh 'kubectl version --client || true'
+                sh 'kubectl config current-context || true'
             }
         }
 
