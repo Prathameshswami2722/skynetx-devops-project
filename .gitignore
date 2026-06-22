@@ -6,3 +6,4 @@ instance/
 *.db
 .DS_Store
 .vscode/
+.terraform/
